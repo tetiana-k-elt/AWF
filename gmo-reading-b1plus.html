@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GM Food: Facts and Debate (B1+ Reading)</title>
+<style>
+:root{--bg:#f4f8f6;--ink:#17302e;--card:#fff;--line:#c9d8d3;--main:#0f5c56;--soft:#dcefe9;--ok:#1d7a46;--okbg:#dff3e6;--bad:#b3402e;--badbg:#fae3de;--hi:#f2b84b}
+@media(prefers-color-scheme:dark){:root{--bg:#10201e;--ink:#e6f1ee;--card:#182d2a;--line:#335450;--main:#6fd0c4;--soft:#1f3f3b;--ok:#7fe0a5;--okbg:#1c4030;--bad:#ff9d8a;--badbg:#4a2620;--hi:#f2b84b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{max-width:780px;margin:0 auto;padding:18px 16px 60px}
+h1{font:700 1.7rem/1.2 Georgia,serif;margin:6px 0 4px}
+h2{font:700 1.25rem/1.3 Georgia,serif;margin:0 0 8px}
+.sub{margin:0 0 16px;opacity:.8;font-size:.95rem}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+nav button{flex:1;min-width:110px;padding:9px 6px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;font:inherit;font-size:.9rem;cursor:pointer}
+nav button.on{background:var(--main);color:var(--bg);border-color:var(--main);font-weight:600}
+nav button.done::after{content:" ✓"}
+section{display:none;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+section.on{display:block}
+.text p{margin:0 0 12px;max-width:68ch}
+.text{border-left:4px solid var(--hi);padding-left:14px;margin-bottom:18px}
+.q{padding:12px 0;border-top:1px solid var(--line)}
+.q p{margin:0 0 8px}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opts button,.btn{padding:8px 14px;border:1px solid var(--main);background:transparent;color:var(--main);border-radius:8px;font:inherit;cursor:pointer}
+.opts button:hover,.btn:hover{background:var(--soft)}
+.opts button.sel{background:var(--main);color:var(--bg)}
+.btn.primary{background:var(--main);color:var(--bg);font-weight:600;margin-top:12px}
+.right{background:var(--okbg)!important;border-color:var(--ok)!important;color:var(--ok)!important}
+.wrong{background:var(--badbg)!important;border-color:var(--bad)!important;color:var(--bad)!important}
+.fb{font-size:.9rem;margin-top:6px;min-height:1em}
+select{font:inherit;padding:7px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);max-width:100%}
+.vrow{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+@media(max-width:560px){.vrow{grid-template-columns:1fr}}
+.score{font-weight:700;margin-top:10px}
+.tip{background:var(--soft);padding:10px 14px;border-radius:8px;font-size:.95rem;margin-bottom:14px}
+.talk li{margin-bottom:10px}
+b.w{background:var(--soft);padding:0 3px;border-radius:3px}
+button:focus-visible,select:focus-visible{outline:3px solid var(--hi);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>GM Food: Facts and Debate</h1>
+<p class="sub">Reading, B1+ · Dietetics and Physical Education · about 40 minutes</p>
+<nav id="nav"></nav>
+
+<!-- 1 -->
+<section id="s0">
+<h2>1. Key words</h2>
+<p class="tip">Match each word from the texts to its meaning. Then check.</p>
+<div id="vocab"></div>
+<button class="btn primary" onclick="checkVocab()">Check</button>
+<div class="score" id="vscore"></div>
+</section>
+
+<!-- 2 -->
+<section id="s1">
+<h2>2. Text A: What is a GM food?</h2>
+<p class="tip">Read the text. Then decide if each sentence is true or false.</p>
+<div class="text">
+<p>A <b class="w">genetically modified</b> (GM) food comes from a plant or animal whose <b class="w">DNA</b> was changed in a laboratory. Scientists add a gene from another living thing to give the crop a useful new quality. This is different from traditional breeding, where farmers cross plants for many years and the changes happen more slowly and less precisely.</p>
+<p>Today, most GM crops are grown for animal feed, oil and sweeteners. Soybeans, maize, cotton and canola are the most common. A few GM foods are eaten fresh, for example one type of papaya that <b class="w">resists</b> a dangerous virus.</p>
+<p>Before a GM food reaches the shops, it must be tested. Experts check if it could cause an <b class="w">allergy</b>, if it contains <b class="w">toxins</b>, and if its nutrients are different from the normal crop. In many countries, government agencies must approve the food first. Major scientific organisations say that the GM foods on sale today are as safe to eat as similar non-GM foods. However, each new product still needs its own safety check.</p>
+</div>
+<div id="tf"></div>
+<div class="score" id="tfscore"></div>
+</section>
+
+<!-- 3 -->
+<section id="s2">
+<h2>3. Text B: Should we use GM crops?</h2>
+<p class="tip">Read the two sides of the debate. Then sort the statements.</p>
+<div class="text">
+<p><b>Supporters say</b> GM crops can help feed a growing population. Some crops give higher <b class="w">yields</b> because they resist insects or disease. One example is Bt maize, which makes its own protection against a pest, so farmers can use less <b class="w">pesticide</b>. GM crops can also be more nutritious. "Golden Rice" was developed to contain vitamin A, because millions of children in some regions do not get enough of it.</p>
+<p><b>Critics say</b> we cannot be sure about the long-term effects on health and nature. Pollen from GM plants can spread to wild plants or to organic fields. Some farmers use a lot of weed-killer on crops designed to survive it, and over time some weeds become <b class="w">resistant</b>. Critics also worry that a few big companies own the seeds, so farmers must buy new ones every year. Many shoppers simply want clear <b class="w">labels</b> so they can choose for themselves.</p>
+</div>
+<div id="sort"></div>
+<button class="btn primary" onclick="checkSort()">Check</button>
+<div class="score" id="sscore"></div>
+</section>
+
+<!-- 4 -->
+<section id="s3">
+<h2>4. Understanding the details</h2>
+<p class="tip">Choose the best answer.</p>
+<div id="mcq"></div>
+<div class="score" id="mscore"></div>
+</section>
+
+<!-- 5 -->
+<section id="s4">
+<h2>5. Speaking and reflection</h2>
+<p class="tip">Discuss in pairs, then share one idea with the class.</p>
+<ol class="talk">
+<li><b>Dietetics:</b> A client asks you, "Are GM foods safe? Should I avoid them?" What would you say? Use some of the key words from this lesson.</li>
+<li><b>Dietetics:</b> Do you think food labels should show if a product contains GM ingredients? Give two reasons.</li>
+<li><b>Physical Education:</b> Athletes often worry about what is in their food. Where can they find reliable information about nutrition and food safety?</li>
+<li><b>Both:</b> Which argument in Text B do you find the most convincing, and why? Which one needs more evidence?</li>
+</ol>
+<p class="tip"><b>Useful language:</b> In my opinion… · I'm not convinced that… · On the one hand… on the other hand… · The evidence suggests… · That's a good point, but…</p>
+</section>
+</div>
+
+<script>
+const titles=["1. Key words","2. Text A","3. Text B","4. Questions","5. Speaking"];
+const done=new Set();
+const nav=document.getElementById('nav');
+titles.forEach((t,i)=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>show(i);b.id='n'+i;nav.appendChild(b)});
+function show(i){document.querySelectorAll('section').forEach((s,j)=>s.classList.toggle('on',i===j));titles.forEach((_,j)=>{const b=document.getElementById('n'+j);b.classList.toggle('on',i===j);b.classList.toggle('done',done.has(j))})}
+function mark(i){done.add(i);show(+document.querySelector('section.on').id.slice(1))}
+
+/* vocab */
+const V=[["allergy","a bad reaction of the body to a food or substance"],["toxin","a poisonous substance"],["yield","the amount of crop that a farm produces"],["pesticide","a chemical used to kill insects that damage crops"],["resistant","not harmed by something"],["label","information printed on a food package"]];
+const shuffled=[...V.map(v=>v[1])].sort((a,b)=>a.localeCompare(b));
+document.getElementById('vocab').innerHTML=V.map((v,i)=>`<div class="vrow"><b>${v[0]}</b><select id="v${i}"><option value="">Choose…</option>${shuffled.map(d=>`<option>${d}</option>`).join('')}</select></div>`).join('');
+function checkVocab(){let c=0;V.forEach((v,i)=>{const s=document.getElementById('v'+i);const ok=s.value===v[1];s.className=s.value?(ok?'right':'wrong'):'';if(ok)c++});document.getElementById('vscore').textContent=`Score: ${c} / ${V.length}`+(c===V.length?' — well done!':' — try the red ones again.');if(c===V.length)mark(0)}
+
+/* true/false */
+const TF=[["GM foods are made by changing the DNA of a plant or animal.",true,"Correct: scientists change the DNA in a laboratory."],["Traditional breeding is faster and more precise than genetic modification.",false,"False: traditional breeding is slower and less precise."],["Most GM crops are eaten fresh as fruit and vegetables.",false,"False: most are used for animal feed, oil and sweeteners."],["Experts test GM foods for allergies and toxins before they are sold.",true,"Correct: this is part of the safety check."],["Once one GM food is approved, all future GM foods are automatically safe.",false,"False: each new product needs its own safety check."]];
+let tfDone=0;
+document.getElementById('tf').innerHTML=TF.map((q,i)=>`<div class="q"><p>${i+1}. ${q[0]}</p><div class="opts"><button onclick="tf(${i},true,this)">True</button><button onclick="tf(${i},false,this)">False</button></div><div class="fb" id="tfb${i}"></div></div>`).join('');
+const tfAns={};
+function tf(i,a,b){if(tfAns[i]!==undefined)return;tfAns[i]=a===TF[i][1];b.classList.add(tfAns[i]?'right':'wrong');document.getElementById('tfb'+i).textContent=TF[i][2];if(Object.keys(tfAns).length===TF.length){const c=Object.values(tfAns).filter(x=>x).length;document.getElementById('tfscore').textContent=`Score: ${c} / ${TF.length}`;mark(1)}}
+
+/* sort */
+const S=[["Some crops can make their own protection against insects.","Supporters"],["Pollen may spread to wild plants or organic fields.","Critics"],["A crop can be designed to contain more vitamin A.","Supporters"],["Weeds can become resistant to weed-killers.","Critics"],["Farmers may have to buy new seeds every year.","Critics"],["Farmers may need less pesticide.","Supporters"],["Shoppers should know what is in their food.","Critics"]];
+document.getElementById('sort').innerHTML=S.map((s,i)=>`<div class="q"><p>${s[0]}</p><div class="opts" id="so${i}"><button onclick="pick(${i},'Supporters',this)">Supporters</button><button onclick="pick(${i},'Critics',this)">Critics</button></div></div>`).join('');
+const sp={};
+function pick(i,v,b){sp[i]=v;document.querySelectorAll('#so'+i+' button').forEach(x=>x.className='');b.className='sel'}
+function checkSort(){let c=0;S.forEach((s,i)=>{document.querySelectorAll('#so'+i+' button').forEach(b=>{b.classList.remove('right','wrong');if(sp[i]===s[1]&&b.textContent===s[1]){b.className='right'}else if(sp[i]===b.textContent&&sp[i]!==s[1]){b.className='wrong'}});if(sp[i]===s[1])c++});document.getElementById('sscore').textContent=`Score: ${c} / ${S.length}`+(c===S.length?' — excellent!':' — change the red answers and check again.');if(c===S.length)mark(2)}
+
+/* mcq */
+const M=[["What is the main reason Bt maize can help farmers?",["It tastes sweeter.","It needs less pesticide.","It grows without water.","It is cheaper to transport."],1,"Text B: it makes its own protection, so farmers can use less pesticide."],["Why was Golden Rice developed?",["To last longer on the shelf.","To grow in cold weather.","To give people more vitamin A.","To replace all other rice."],2,"Text B: many children do not get enough vitamin A."],["What does the writer say about the safety of GM foods on sale today?",["They are less safe than non-GM foods.","Nobody has tested them.","Major scientific organisations say they are as safe as similar non-GM foods.","They are only safe if they are organic."],2,"Text A, final paragraph."],["What is the writer's main purpose in Text B?",["To persuade readers to avoid GM food.","To show both sides of a debate.","To explain how DNA works.","To advertise new seeds."],1,"The text gives the arguments of supporters and critics equally."]];
+const mAns={};
+document.getElementById('mcq').innerHTML=M.map((q,i)=>`<div class="q"><p>${i+1}. ${q[0]}</p><div class="opts">${q[1].map((o,j)=>`<button onclick="mc(${i},${j},this)">${o}</button>`).join('')}</div><div class="fb" id="mf${i}"></div></div>`).join('');
+function mc(i,j,b){if(mAns[i]!==undefined)return;mAns[i]=j===M[i][2];b.classList.add(mAns[i]?'right':'wrong');if(!mAns[i])b.parentElement.children[M[i][2]].classList.add('right');document.getElementById('mf'+i).textContent=M[i][3];if(Object.keys(mAns).length===M.length){const c=Object.values(mAns).filter(x=>x).length;document.getElementById('mscore').textContent=`Score: ${c} / ${M.length}`;mark(3)}}
+
+show(0);
+</script>
+</body>
+</html>
