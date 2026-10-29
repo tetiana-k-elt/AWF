@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dietetics & Nutrition: Units 9 & 10 Consolidation Review</title>
+    <style>
+        :root {
+            --primary: #1b4332;
+            --primary-light: #2d6a4f;
+            --accent: #52b788;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #2b2d42;
+            --text-muted: #6c757d;
+            --correct: #2a9d8f;
+            --correct-bg: #e8f5e9;
+            --incorrect: #e76f51;
+            --incorrect-bg: #ffebee;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+
+        header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background-color: #e0e0e0;
+            border-radius: 20px;
+            height: 12px;
+            width: 100%;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background-color: var(--accent);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* Exercise Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--primary-light);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card .badge {
+            font-size: 0.8rem;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-weight: normal;
+        }
+
+        .instructions {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Inputs & Buttons */
+        button.btn-check {
+            background-color: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 1rem;
+        }
+
+        button.btn-check:hover {
+            background-color: var(--primary);
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 6px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback.correct {
+            background-color: var(--correct-bg);
+            color: var(--correct);
+            border: 1px solid var(--correct);
+            display: block;
+        }
+
+        .feedback.incorrect {
+            background-color: var(--incorrect-bg);
+            color: var(--incorrect);
+            border: 1px solid var(--incorrect);
+            display: block;
+        }
+
+        /* Exercise 1: Matching */
+        .matching-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .matching-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8f9fa;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+
+        select {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+            max-width: 250px;
+        }
+
+        /* Exercise 2: MCQs */
+        .mcq-option {
+            display: block;
+            margin-bottom: 0.5rem;
+            padding: 0.8rem;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .mcq-option:hover {
+            background: #e9ecef;
+        }
+
+        .mcq-option input {
+            margin-right: 0.8rem;
+        }
+
+        /* Exercise 3: Categorization Drag/Drop & Click */
+        .categorization-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .category-box {
+            background: #f1f3f5;
+            border: 2px dashed #ced4da;
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 120px;
+        }
+
+        .category-box h3 {
+            margin-top: 0;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        .item-pool {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            background: #e9ecef;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .draggable-item {
+            background: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid #ced4da;
+            cursor: grab;
+            user-select: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .draggable-item.selected {
+            border-color: var(--accent);
+            background-color: #e8f5e9;
+        }
+
+        /* Exercise 4: Gap Fill */
+        .gap-fill-text {
+            line-height: 2.2;
+            font-size: 1.05rem;
+        }
+
+        .gap-fill-text input {
+            border: none;
+            border-bottom: 2px solid var(--primary-light);
+            background: #f8f9fa;
+            padding: 0.2rem 0.5rem;
+            font-size: 1rem;
+            width: 140px;
+            text-align: center;
+        }
+
+        /* Exercise 5: True/False with Justification */
+        .tf-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Exercise 6: Diagnostic Case Matrix */
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .matrix-table th, .matrix-table td {
+            border: 1px solid #dee2e6;
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        .matrix-table th {
+            background-color: #f1f3f5;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .matching-grid {
+                grid-template-columns: 1fr;
+            }
+            .matrix-table {
+                font-size: 0.85rem;
+            }
+            .matrix-table th, .matrix-table td {
+                padding: 0.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Dietetics & Nutrition Science</h1>
+    <p>Consolidation Review: Units 9 & 10 (Novel Foods, Diets & Assessment Tools)</p>
+</header>
+
+<div class="container">
+    <!-- Overall Progress -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- EXERCISE 1: Terminology Matching -->
+    <div class="card" id="ex1">
+        <h2>Exercise 1: Professional Terminology Matching <span class="badge">Unit 9 & 10 Concepts</span></h2>
+        <p class="instructions">Match each clinical or nutritional definition on the left with its exact scientific term from the dropdown selection.</p>
+        
+        <div class="matching-grid">
+            <div class="matching-item">
+                <span>1. Live microorganisms conferring health benefits on the host when administered adequately.</span>
+                <select id="m1">
+                    <option value="">--Select--</option>
+                    <option value="Prebiotics">Prebiotics</option>
+                    <option value="Probiotics">Probiotics</option>
+                    <option value="Phytochemicals">Phytochemicals</option>
+                    <option value="Anthropometry">Anthropometry</option>
+                </select>
+            </div>
+            <div class="matching-item">
+                <span>2. Non-digestible food components that selectively stimulate beneficial gut microbial growth.</span>
+                <select id="m2">
+                    <option value="">--Select--</option>
+                    <option value="Prebiotics">Prebiotics</option>
+                    <option value="Probiotics">Probiotics</option>
+                    <option value="Enteral Feeding">Enteral Feeding</option>
+                    <option value="Functional Food">Functional Food</option>
+                </select>
+            </div>
+            <div class="matching-item">
+                <span>3. Measurement of physical parameters of the human body (e.g., skinfold thickness, circumference).</span>
+                <select id="m3">
+                    <option value="">--Select--</option>
+                    <option value="Biochemical Test">Biochemical Test</option>
+                    <option value="Anthropometry">Anthropometry</option>
+                    <option value="Clinical Exam">Clinical Exam</option>
+                    <option value="Hydrodensitometry">Hydrodensitometry</option>
+                </select>
+            </div>
+            <div class="matching-item">
+                <span>4. Foods modified or enhanced to offer health benefits beyond standard macronutrient/micronutrient values.</span>
+                <select id="m4">
+                    <option value="">--Select--</option>
+                    <option value="Convenience Food">Convenience Food</option>
+                    <option value="Genetically Modified Food">Genetically Modified Food</option>
+                    <option value="Functional Food">Functional Food</option>
+                    <option value="Organic Food">Organic Food</option>
+                </select>
+            </div>
+            <div class="matching-item">
+                <span>5. Severe muscle and adipose tissue wasting due to long-term energy and protein deficiency.</span>
+                <select id="m5">
+                    <option value="">--Select--</option>
+                    <option value="Kwashiorkor">Kwashiorkor</option>
+                    <option value="Sarcopenia">Sarcopenia</option>
+                    <option value="Marasmus">Marasmus</option>
+                    <option value="Edema">Edema</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn-check" onclick="checkMatching()">Check Answers</button>
+        <div class="feedback" id="fb-matching"></div>
+    </div>
+
+    <!-- EXERCISE 2: Novel Foods & Assessment Assessment (MCQ) -->
+    <div class="card" id="ex2">
+        <h2>Exercise 2: Analytical Conceptual Choice <span class="badge">Multiple Choice</span></h2>
+        <p class="instructions">Select the single best clinical or scientific statement for each question.</p>
+
+        <div style="margin-bottom: 1.5rem;">
+            <p><strong>1. Which assessment tool is most prone to recall bias and under-reporting, yet offers immediate low-cost clinical insights?</strong></p>
+            <label class="mcq-option"><input type="radio" name="q1" value="A"> Hydrostatic Underwater Weighing</label>
+            <label class="mcq-option"><input type="radio" name="q1" value="B"> 24-Hour Dietary Recall</label>
+            <label class="mcq-option"><input type="radio" name="q1" value="C"> Dual-Energy X-Ray Absorptiometry (DXA)</label>
+            <label class="mcq-option"><input type="radio" name="q1" value="D"> 3-Day Weighed Food Record</label>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+            <p><strong>2. Commercially processed convenience foods are most consistently critiqued by dietitians for containing high levels of:</strong></p>
+            <label class="mcq-option"><input type="radio" name="q2" value="A"> Complex carbohydrates and insoluble fibre</label>
+            <label class="mcq-option"><input type="radio" name="q2" value="B"> Prebiotic oligosaccharides and bioavailable iron</label>
+            <label class="mcq-option"><input type="radio" name="q2" value="C"> Sodium, saturated/trans fats, and added free sugars</label>
+            <label class="mcq-option"><input type="radio" name="q2" value="D"> Essential amino acids and water-soluble vitamins</label>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+            <p><strong>3. Biochemical assessment allows clinicians to identify nutritional deficiencies at which stage?</strong></p>
+            <label class="mcq-option"><input type="radio" name="q3" value="A"> Subclinical stage, before physical signs or anatomical symptoms manifest</label>
+            <label class="mcq-option"><input type="radio" name="q3" value="B"> Only after severe physical wasting is confirmed by anthropometry</label>
+            <label class="mcq-option"><input type="radio" name="q3" value="C"> Exclusively when a patient exhibits visible signs of scurvy or rickets</label>
+            <label class="mcq-option"><input type="radio" name="q3" value="D"> Only after long-term dietary food diaries are logged</label>
+        </div>
+
+        <button class="btn-check" onclick="checkMCQ()">Check Answers</button>
+        <div class="feedback" id="fb-mcq"></div>
+    </div>
+
+    <!-- EXERCISE 3: Categorization Matrix (Interactive Click/Assign) -->
+    <div class="card" id="ex3">
+        <h2>Exercise 3: Novel Food & Dietary Component Classification <span class="badge">Categorization</span></h2>
+        <p class="instructions">Click an item from the pool below, then click the correct functional/dietary category box to assign it.</p>
+
+        <div class="item-pool" id="itemPool">
+            <div class="draggable-item" data-item="1" data-cat="probiotic">Kefir & Live Yoghurt</div>
+            <div class="draggable-item" data-item="2" data-cat="prebiotic">Inulin & Chicory Root</div>
+            <div class="draggable-item" data-item="3" data-cat="convenience">Frozen TV Dinners</div>
+            <div class="draggable-item" data-item="4" data-cat="functional">Plant Stanol Margarine</div>
+            <div class="draggable-item" data-item="5" data-cat="probiotic">Sauerkraut & Kimchi</div>
+            <div class="draggable-item" data-item="6" data-cat="prebiotic">Raw Garlic & Leeks</div>
+            <div class="draggable-item" data-item="7" data-cat="convenience">Instant Noodle Packs</div>
+            <div class="draggable-item" data-item="8" data-cat="functional">Calcium-Fortified Orange Juice</div>
+        </div>
+
+        <div class="categorization-container">
+            <div class="category-box" id="cat-probiotic" onclick="assignItem('probiotic')">
+                <h3>Probiotics</h3>
+            </div>
+            <div class="category-box" id="cat-prebiotic" onclick="assignItem('prebiotic')">
+                <h3>Prebiotics</h3>
+            </div>
+            <div class="category-box" id="cat-functional" onclick="assignItem('functional')">
+                <h3>Functional / Fortified</h3>
+            </div>
+            <div class="category-box" id="cat-convenience" onclick="assignItem('convenience')">
+                <h3>Ultra-Processed / Convenience</h3>
+            </div>
+        </div>
+
+        <button class="btn-check" onclick="checkCategorization()">Verify Classification</button>
+        <div class="feedback" id="fb-cat"></div>
+    </div>
+
+    <!-- EXERCISE 4: Gap-Fill Review Text -->
+    <div class="card" id="ex4">
+        <h2>Exercise 4: Clinical Nutritional Assessment Protocol <span class="badge">Gap-Fill</span></h2>
+        <p class="instructions">Complete the technical passage regarding comprehensive clinical assessment methods using exact terminology.</p>
+
+        <div class="gap-fill-text">
+            A standard clinical nutrition assessment utilizes the ABCD format. 
+            <strong>A</strong> stands for <input type="text" id="gf1" placeholder="e.g. Anthropometry">, which evaluates body dimensions using callipers to measure 
+            <input type="text" id="gf2" placeholder="tissue type"> thickness. 
+            <strong>B</strong> stands for <input type="text" id="gf3" placeholder="test type"> analyses, which examine serum, blood, and urine samples to detect subclinical deficiencies. 
+            <strong>C</strong> stands for Clinical examination, noting physical signs of nutrient deficits, such as bilateral 
+            <input type="text" id="gf4" placeholder="fluid retention sign"> indicative of Kwashiorkor. 
+            Finally, <strong>D</strong> represents <input type="text" id="gf5" placeholder="assessment type"> history, frequently gathered via a 24-hour recall or a multi-day food diary.
+        </div>
+
+        <button class="btn-check" onclick="checkGapFill()">Validate Text</button>
+        <div class="feedback" id="fb-gapfill"></div>
+    </div>
+
+    <!-- EXERCISE 5: True/False & Critical Justification -->
+    <div class="card" id="ex5">
+        <h2>Exercise 5: True / False Clinical Evaluation <span class="badge">Critical Thinking</span></h2>
+        <p class="instructions">Determine whether the statement is True or False, and select the correct rationale.</p>
+
+        <div class="tf-item">
+            <p><strong>1. Serum albumin is a highly sensitive and immediate real-time marker for acute dietary protein deficiency.</strong></p>
+            <select id="tf1-val">
+                <option value="">--Select--</option>
+                <option value="True">True</option>
+                <option value="False">False</option>
+            </select>
+            <select id="tf1-rat" style="max-width: 100%; margin-top: 0.5rem;">
+                <option value="">--Select Rationale--</option>
+                <option value="A">Albumin has a long half-life (~20 days) and is heavily influenced by inflammation, hydration, and acute-phase metabolic stress.</option>
+                <option value="B">Albumin immediately drops within 2 hours of missing a protein-rich meal.</option>
+                <option value="C">Albumin is stored in adipose tissue and cannot be measured via blood test.</option>
+            </select>
+        </div>
+
+        <div class="tf-item">
+            <p><strong>2. Genetically Modified (GM) crops are engineered exclusively to enhance taste and sensory appearance.</strong></p>
+            <select id="tf2-val">
+                <option value="">--Select--</option>
+                <option value="True">True</option>
+                <option value="False">False</option>
+            </select>
+            <select id="tf2-rat" style="max-width: 100%; margin-top: 0.5rem;">
+                <option value="">--Select Rationale--</option>
+                <option value="A">GM crops are primarily modified for agronomic traits like pest resistance, herbicide tolerance, drought resistance, and enhanced micronutrient content (e.g., Golden Rice).</option>
+                <option value="B">Genetic modification only changes the colour of vegetables for display purposes.</option>
+                <option value="C">GM technology is legally prohibited from modifying crop survival traits.</option>
+            </select>
+        </div>
+
+        <button class="btn-check" onclick="checkTF()">Check Answers</button>
+        <div class="feedback" id="fb-tf"></div>
+    </div>
+
+    <!-- EXERCISE 6: Comprehensive Case Diagnostic Matrix -->
+    <div class="card" id="ex6">
+        <h2>Exercise 6: Differential Assessment & Diagnostic Matrix <span class="badge">Case Analysis</span></h2>
+        <p class="instructions">Analyze the clinical presentations below and assign the correct primary diagnostic indicator and recommended assessment protocol.</p>
+
+        <table class="matrix-table">
+            <thead>
+                <tr>
+                    <th>Clinical Case Presentation</th>
+                    <th>Primary Deficiency / Risk</th>
+                    <th>Recommended Diagnostic Tool</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Child presenting with stunted growth, bowed legs (genu varum), enlarged epiphyses, and low sunlight exposure.</td>
+                    <td>
+                        <select id="mat1-1">
+                            <option value="">--Select--</option>
+                            <option value="Vitamin D / Rickets">Vitamin D / Rickets</option>
+                            <option value="Vitamin C / Scurvy">Vitamin C / Scurvy</option>
+                            <option value="Iron Deficiency">Iron Deficiency</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="mat1-2">
+                            <option value="">--Select--</option>
+                            <option value="Radiography & Serum 25(OH)D">Radiography & Serum 25(OH)D</option>
+                            <option value="24-hour recall only">24-hour recall only</option>
+                            <option value="Skinfold Callipers">Skinfold Callipers</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Adult presenting with inflamed, bleeding gums, petechiae, impaired wound healing, and complete lack of fresh fruit/veg intake.</td>
+                    <td>
+                        <select id="mat2-1">
+                            <option value="">--Select--</option>
+                            <option value="Vitamin A Deficiency">Vitamin A Deficiency</option>
+                            <option value="Vitamin C / Scurvy">Vitamin C / Scurvy</option>
+                            <option value="Protein Energy Malnutrition">Protein Energy Malnutrition</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="mat2-2">
+                            <option value="">--Select--</option>
+                            <option value="Clinical Examination & Plasma Ascorbate">Clinical Examination & Plasma Ascorbate</option>
+                            <option value="Underwater Weighing">Underwater Weighing</option>
+                            <option value="Bioelectrical Impedance">Bioelectrical Impedance</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Elderly bedbound patient exhibiting severe muscle wasting, temporal loss, low triceps skinfold, and unintended weight loss of 12% in 3 months.</td>
+                    <td>
+                        <select id="mat3-1">
+                            <option value="">--Select--</option>
+                            <option value="Marasmus / Severe Wasting">Marasmus / Severe Wasting</option>
+                            <option value="Hypervitaminosis">Hypervitaminosis</option>
+                            <option value="Kwashiorkor with Edema">Kwashiorkor with Edema</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="mat3-2">
+                            <option value="">--Select--</option>
+                            <option value="Comprehensive Anthropometry & MUST Tool">Comprehensive Anthropometry & MUST Tool</option>
+                            <option value="Qualitative FFQ">Qualitative FFQ</option>
+                            <option value="Urinary Glucose test">Urinary Glucose test</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="btn-check" onclick="checkMatrix()">Submit Case Analysis</button>
+        <div class="feedback" id="fb-matrix"></div>
+    </div>
+</div>
+
+<script>
+    // State tracking for progress
+    const completed = { ex1: false, ex2: false, ex3: false, ex4: false, ex5: false, ex6: false };
+
+    function updateProgress() {
+        const total = Object.keys(completed).length;
+        const done = Object.values(completed).filter(Boolean).length;
+        const pct = Math.round((done / total) * 100);
+        document.getElementById('progressBar').style.width = pct + '%';
+    }
+
+    // Exercise 1: Matching
+    function checkMatching() {
+        const m1 = document.getElementById('m1').value;
+        const m2 = document.getElementById('m2').value;
+        const m3 = document.getElementById('m3').value;
+        const m4 = document.getElementById('m4').value;
+        const m5 = document.getElementById('m5').value;
+
+        const fb = document.getElementById('fb-matching');
+
+        if (m1 === "Probiotics" && m2 === "Prebiotics" && m3 === "Anthropometry" && m4 === "Functional Food" && m5 === "Marasmus") {
+            fb.className = "feedback correct";
+            fb.innerHTML = "<strong>Correct!</strong> Excellent command of scientific terminology across novel foods and assessment tools.";
+            completed.ex1 = true;
+        } else {
+            fb.className = "feedback incorrect";
+            fb.innerHTML = "<strong>Incorrect entries detected.</strong> Review definitions: Probiotics = live organisms; Prebiotics = non-digestible microbial substrates; Anthropometry = body measurements; Functional foods = enhanced health foods; Marasmus = tissue wasting.";
+            completed.ex1 = false;
+        }
+        updateProgress();
+    }
+
+    // Exercise 2: MCQ
+    function checkMCQ() {
+        const q1 = document.querySelector('input[name="q1"]:checked');
+        const q2 = document.querySelector('input[name="q2"]:checked');
+        const q3 = document.querySelector('input[name="q3"]:checked');
+
+        const fb = document.getElementById('fb-mcq');
+
+        if (q1 && q1.value === "B" && q2 && q2.value === "C" && q3 && q3.value === "A") {
+            fb.className = "feedback correct";
+            fb.innerHTML = "<strong>Correct!</strong> 1: 24-hr recall is highly vulnerable to recall/under-reporting bias. 2: Convenience foods suffer from elevated Na+, saturated fats, and sugars. 3: Biochemical testing detects subclinical deficiency prior to anatomical signs.";
+            completed.ex2 = true;
+        } else {
+            fb.className = "feedback incorrect";
+            fb.innerHTML = "<strong>Incorrect choices found.</strong> Please review the clinical rationale for each assessment method and convenience food profile.";
+            completed.ex2 = false;
+        }
+        updateProgress();
+    }
+
+    // Exercise 3: Click-to-assign Categorization
+    let selectedItem = null;
+
+    document.querySelectorAll('.draggable-item').forEach(item => {
+        item.addEventListener('click', function() {
+            document.querySelectorAll('.draggable-item').forEach(i => i.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedItem = this;
+        });
+    });
+
+    function assignItem(category) {
+        if (!selectedItem) return;
+        const targetBox = document.getElementById('cat-' + category);
+        targetBox.appendChild(selectedItem);
+        selectedItem.classList.remove('selected');
+        selectedItem = null;
+    }
+
+    function checkCategorization() {
+        const items = document.querySelectorAll('.draggable-item');
+        let allCorrect = true;
+
+        items.forEach(item => {
+            const expectedCat = item.getAttribute('data-cat');
+            const parentId = item.parentElement.id;
+            if (parentId !== 'cat-' + expectedCat) {
+                allCorrect = false;
+            }
+        });
+
+        const fb = document.getElementById('fb-cat');
+        if (allCorrect && items.length === 8) {
+            fb.className = "feedback correct";
+            fb.innerHTML = "<strong>Perfect Classification!</strong> Probiotics (live cultures), Prebiotics (fermentable fibres), Functional (fortified matrices), and Ultra-processed convenience foods are accurately categorized.";
+            completed.ex3 = true;
+        } else {
+            fb.className = "feedback incorrect";
+            fb.innerHTML = "<strong>Misclassified items found.</strong> Ensure all 8 items are assigned to their correct category based on Unit 9 definitions.";
+            completed.ex3 = false;
+        }
+        updateProgress();
+    }
+
+    // Exercise 4: Gap Fill
+    function checkGapFill() {
+        const g1 = document.getElementById('gf1').value.trim().toLowerCase();
+        const g2 = document.getElementById('gf2').value.trim().toLowerCase();
+        const g3 = document.getElementById('gf3').value.trim().toLowerCase();
+        const g4 = document.getElementById('gf4').value.trim().toLowerCase();
+        const g5 = document.getElementById('gf5').value.trim().toLowerCase();
+
+        const valid1 = g1.includes("anthropometry");
+        const valid2 = g2.includes("skinfold") || g2.includes("fat") || g2.includes("adipose");
+        const valid3 = g3.includes("biochemical") || g3.includes("laboratory") || g3.includes("lab");
+        const valid4 = g4.includes("edema") || g4.includes("oedema") || g4.includes("swelling");
+        const valid5 = g5.includes("dietary") || g5.includes("dietary-social");
+
+        const fb = document.getElementById('fb-gapfill');
+        if (valid1 && valid2 && valid3 && valid4 && valid5) {
+            fb.className = "feedback correct";
+            fb.innerHTML = "<strong>Accurate Text Protocol!</strong> You have successfully completed the ABCD clinical assessment framework.";
+            completed.ex4 = true;
+        } else {
+            fb.className = "feedback incorrect";
+            fb.innerHTML = "<strong>Validation Failed.</strong> Required terms: 1: Anthropometry; 2: Skinfold/Fat; 3: Biochemical/Laboratory; 4: Edema/Oedema; 5: Dietary.";
+            completed.ex4 = false;
+        }
+        updateProgress();
+    }
+
+    // Exercise 5: True/False & Rationale
+    function checkTF() {
+        const v1 = document.getElementById('tf1-val').value;
+        const r1 = document.getElementById('tf1-rat').value;
+        const v2 = document.getElementById('tf2-val').value;
+        const r2 = document.getElementById('tf2-rat').value;
+
+        const fb = document.getElementById('fb-tf');
+
+        if (v1 === "False" && r1 === "A" && v2 === "False" && r2 === "A") {
+            fb.className = "feedback correct";
+            fb.innerHTML = "<strong>Correct Reasoning!</strong> Serum albumin is a poor acute marker due to its long half-life and hepatic acute-phase response. GM crops primarily target agronomic/nutritional traits rather than simple aesthetics.";
+            completed.ex5 = true;
+        } else {
+            fb.className = "feedback incorrect";
+            fb.innerHTML = "<strong>Incorrect responses.</strong> Re-evaluate serum albumin kinetics and the primary agronomic purposes of genetic modification.";
+            completed.ex5 = false;
+        }
+        updateProgress();
+    }
+
+    // Exercise 6: Diagnostic Matrix
+    function checkMatrix() {
+        const m11 = document.getElementById('mat1-1').value;
+        const m12 = document.getElementById('mat1-2').value;
+        const m21 = document.getElementById('mat2-1').value;
+        const m22 = document.getElementById('mat2-2').value;
+        const m31 = document.getElementById('mat3-1').value;
+        const m32 = document.getElementById('mat3-2').value;
+
+        const fb = document.getElementById('fb-matrix');
+
+        if (m11 === "Vitamin D / Rickets" && m12 === "Radiography & Serum 25(OH)D" &&
+            m21 === "Vitamin C / Scurvy" && m22 === "Clinical Examination & Plasma Ascorbate" &&
+            m31 === "Marasmus / Severe Wasting" && m32 === "Comprehensive Anthropometry & MUST Tool") {
+            fb.className = "feedback correct";
+            fb.innerHTML = "<strong>Clinical Diagnostic Matrix Mastered!</strong> All case presentations, primary nutrient pathologies, and targeted diagnostic pathways are accurately matched.";
+            completed.ex6 = true;
+        } else {
+            fb.className = "feedback incorrect";
+            fb.innerHTML = "<strong>Diagnostic Mismatch.</strong> Review signs of Rickets (Vitamin D), Scurvy (Vitamin C), and Severe Wasting/Marasmus alongside their primary evaluation tools.";
+            completed.ex6 = false;
+        }
+        updateProgress();
+    }
+</script>
+
+</body>
+</html>
+```eof
+
+I have generated the interactive **Dietetics Consolidation Review** tool for Units 9 and 10.
+
+### Features Included:
+1. **Interactive Self-Check Modules:** 6 distinct, highly varied activity formats including dropdown matching, multiple-choice analytics, click-to-assign categorizations, medical text gap-fill, true/false with rationale validation, and clinical case diagnostic matrices.
+2. **Comprehensive Coverage:** Covers functional foods, prebiotics/probiotics, genetically modified foods, convenience foods, nutritional status assessment (ABCD model), clinical deficiency signs, and dietary recall methods.
+3. **Real-time Feedback & Tracking:** Immediate visual feedback with explicit academic explanations for every activity and an interactive progress bar.
